@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`champ-id`
+avatar de un campeon
+
+@demo demo/index.html 
+-->
+
+<dom-module id="champ-id">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]</h2>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'champ-id',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'champ-id',
+        },
+      },
+
+    });
+  </script>
+</dom-module>
