@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-item/paper-icon-item.html">
 
 <!--
 `skin-menu`
@@ -14,20 +15,25 @@ App menu
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]</h2>
+    
+      <paper-icon-item><iron-icon icon="favorite" item-icon></iron-icon>Champions</paper-icon-item>
+      
+      <paper-icon-item><iron-icon icon="favorite" item-icon></iron-icon>Sale</paper-icon-item>
+      
+      <paper-icon-item><iron-icon icon="favorite" item-icon></iron-icon>Wishlist</paper-icon-item>
+      
+      <paper-icon-item><iron-icon icon="favorite" item-icon></iron-icon>Collection</paper-icon-item>
+      
+      <paper-icon-item><iron-icon icon="favorite" item-icon></iron-icon>Settings</paper-icon-item>
+      
+      <paper-icon-item><iron-icon icon="favorite" item-icon></iron-icon>About</paper-icon-item>
+      
   </template>
 
   <script>
     Polymer({
 
-      is: 'skin-menu',
-
-      properties: {
-        prop1: {
-          type: String,
-          value: 'skin-menu',
-        },
-      },
+      is: 'skin-menu'
 
     });
   </script>
