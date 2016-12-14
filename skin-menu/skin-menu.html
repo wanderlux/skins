@@ -16,24 +16,28 @@ App menu
       }
     </style>
     
-      <paper-icon-item><iron-icon icon="favorite" item-icon></iron-icon>Champions</paper-icon-item>
+      <paper-icon-item id="index" on-tap="goto"><iron-icon icon="assignment-ind" item-icon></iron-icon>Champions</paper-icon-item>
       
-      <paper-icon-item><iron-icon icon="favorite" item-icon></iron-icon>Sale</paper-icon-item>
+      <paper-icon-item id="sale" on-tap="goto"><iron-icon icon="card-giftcard" item-icon></iron-icon>Sale</paper-icon-item>
       
-      <paper-icon-item><iron-icon icon="favorite" item-icon></iron-icon>Wishlist</paper-icon-item>
+      <paper-icon-item id="fav" on-tap="goto"><iron-icon icon="favorite" item-icon></iron-icon>Wishlist</paper-icon-item>
       
-      <paper-icon-item><iron-icon icon="favorite" item-icon></iron-icon>Collection</paper-icon-item>
+      <paper-icon-item id="col" on-tap="goto"><iron-icon icon="book" item-icon></iron-icon>Collection</paper-icon-item>
       
-      <paper-icon-item><iron-icon icon="favorite" item-icon></iron-icon>Settings</paper-icon-item>
+      <paper-icon-item id="settings" on-tap="goto"><iron-icon icon="settings" item-icon></iron-icon>Settings</paper-icon-item>
       
-      <paper-icon-item><iron-icon icon="favorite" item-icon></iron-icon>About</paper-icon-item>
+      <paper-icon-item id="about" on-tap="goto"><iron-icon icon="help" item-icon></iron-icon>About</paper-icon-item>
       
   </template>
 
   <script>
     Polymer({
 
-      is: 'skin-menu'
+      is: 'skin-menu',
+        
+        goto: function(url) {
+            window.location.href = url.target.id + '.html';
+        }
 
     });
   </script>
