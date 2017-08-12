@@ -1,0 +1,76 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../iron-list/iron-list.html">
+<link rel="import" href="../champ-id/champ-id.html">
+
+<dom-module id="champ-list">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <iron-ajax
+      auto
+      url="champions.json"
+      handleAs="json"
+      last-response="{{lib}}"
+    ></iron-ajax>
+    <h2>Hello [[prop1]]!</h2>
+
+    <iron-list items="{{_toArray(lib.data)}}" as="champ">
+      <template>
+        <div>
+          <champ-id champ="{{champ.obj}}"></champ-id>
+
+          <!--span>{{champ.id}}</span>
+          <span>{{champ.key}}</span>
+          <span>{{champ.title}}</span>
+          <span>{{champ.skins}}</span>
+          <span>{{champ.obj}}</span-->
+        </div>
+      </template>
+    </iron-list>
+
+
+  </template>
+
+  <script>
+    /**
+     * `champ-list`
+     * list of faces
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ChampList extends Polymer.Element {
+      static get is() { return 'champ-list'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'champ-list'
+          }
+        };
+      }
+
+      _toArray(obj) {
+            return Object.keys(obj).map(function(key) {
+              console.info(obj[key]);
+                return {
+                    id: key,
+                    key: obj[key].key,
+                    name: obj[key].name,
+                    title: obj[key].title,
+                    skins: obj[key].skins,
+                    obj: obj[key]
+                };
+            });
+        }
+    }
+
+    window.customElements.define(ChampList.is, ChampList);
+  </script>
+</dom-module>

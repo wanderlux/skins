@@ -1,11 +1,5 @@
-<link rel="import" href="../polymer/polymer.html">
-
-<!--
-`champ-id`
-avatar de un campeon
-
-@demo demo/index.html 
--->
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-image/iron-image.html">
 
 <dom-module id="champ-id">
   <template>
@@ -14,21 +8,49 @@ avatar de un campeon
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]</h2>
+    <a href="{{champ.key}}">
+
+    <iron-image
+      src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/[[champ.key]].png">
+    [[champ.name]]  </a>
   </template>
 
   <script>
-    Polymer({
+    /**
+     * `champ-id`
+     * the face of the champ
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ChampId extends Polymer.Element {
+      static get is() { return 'champ-id'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'champ-id'
+          },
+          champ: {
+            type: Object
+          }
+        };
+      }
+      _toArray(obj) {
+            return Object.keys(obj).map(function(key) {
+                return {
+                    id: key,
+                    key: obj[key].key,
+                    name: obj[key].name,
+                    title: obj[key].title,
+                    skins: obj[key].skins,
+                    obj: obj[key]
+                };
+            });
+        }
+    }
 
-      is: 'champ-id',
-
-      properties: {
-        prop1: {
-          type: String,
-          value: 'champ-id',
-        },
-      },
-
-    });
+    window.customElements.define(ChampId.is, ChampId);
   </script>
 </dom-module>

@@ -12,8 +12,10 @@
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
     <link rel="import" href="../champ-id.html">
 
-    <style is="custom-style" include="demo-pages-shared-styles">
-    </style>
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
   </head>
   <body>
     <div class="vertical-section-container centered">
@@ -21,6 +23,12 @@
       <demo-snippet>
         <template>
           <champ-id></champ-id>
+        </template>
+      </demo-snippet>
+      <h3>Basic champ-id demo</h3>
+      <demo-snippet>
+        <template>
+          <champ-id champ="{id: 117, key: "Lulu", name: "Lulu", title: "the Fae Sorceress", skins: "s"}"></champ-id>
         </template>
       </demo-snippet>
     </div>
