@@ -16,20 +16,12 @@
       url="champions.json"
       handleAs="json"
       last-response="{{lib}}"
+      on-response="_handleResponse"
     ></iron-ajax>
-    <h2>Hello [[prop1]]!</h2>
 
-    <iron-list items="{{_toArray(lib.data)}}" as="champ">
+    <iron-list grid items="{{champs}}" as="champ">
       <template>
-        <div>
           <champ-id champ="{{champ.obj}}"></champ-id>
-
-          <!--span>{{champ.id}}</span>
-          <span>{{champ.key}}</span>
-          <span>{{champ.title}}</span>
-          <span>{{champ.skins}}</span>
-          <span>{{champ.obj}}</span-->
-        </div>
       </template>
     </iron-list>
 
@@ -56,9 +48,20 @@
         };
       }
 
+      _compare(a, b){
+        if (a.name < b.name)
+          return -1;
+        if (a.name > b.name)
+          return 1;
+        return 0;
+      }
+
+      _handleResponse(response){
+          this.champs = this._toArray(this.lib.data).sort(this._compare);
+      }
+
       _toArray(obj) {
             return Object.keys(obj).map(function(key) {
-              console.info(obj[key]);
                 return {
                     id: key,
                     key: obj[key].key,

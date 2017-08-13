@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>skin-list demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../skin-list.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic skin-list demo</h3>
+      <demo-snippet>
+        <template>
+          <skin-list></skin-list>
+        </template>
+      </demo-snippet>
+      <demo-snippet>
+        <template>
+          <skin-list champ='{"id": 117, "key": "Lulu", "name": "Lulu", "title": "the Fae Sorceress", "skins":
+          [ {"num": 0,  "id": 117000,"name": "default"  },{  "num": 1,  "id": 117001,  "name": "Bittersweet Lulu"}]}'></skin-list>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>

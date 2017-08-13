@@ -1,18 +1,22 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../iron-image/iron-image.html">
 
-<dom-module id="champ-id">
+<dom-module id="champ-id"  on-click="handleClick">
   <template>
+
     <style>
       :host {
         display: block;
       }
+      iron-image {
+        border-radius: 100px;
+      }
     </style>
-    <a href="{{champ.key}}">
 
-    <iron-image
-      src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/[[champ.key]].png">
-    [[champ.name]]  </a>
+    <!--a href="[[champ.key]]">  </a-->
+      <iron-image alt="[[champ.name]]" src="[[ddragon]][[champ.key]].png">
+      [[champ.name]]
+
   </template>
 
   <script>
@@ -28,27 +32,26 @@
       static get is() { return 'champ-id'; }
       static get properties() {
         return {
-          prop1: {
+          ddragon: {
             type: String,
-            value: 'champ-id'
+            readOnly: true,
+            value: 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/'
           },
           champ: {
             type: Object
           }
         };
       }
-      _toArray(obj) {
-            return Object.keys(obj).map(function(key) {
-                return {
-                    id: key,
-                    key: obj[key].key,
-                    name: obj[key].name,
-                    title: obj[key].title,
-                    skins: obj[key].skins,
-                    obj: obj[key]
-                };
-            });
-        }
+
+      _handleClick(e){
+        console.info('click');
+      }
+
+      constructor(){
+        super();
+        this.addEventListener('click', e => this._handleClick(e));
+      }
+
     }
 
     window.customElements.define(ChampId.is, ChampId);
