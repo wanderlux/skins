@@ -8,6 +8,11 @@
     <style>
       :host {
         display: block;
+
+      }
+      champ-id {
+        width: 15vh;
+        height: 15vh;
       }
     </style>
 
@@ -19,12 +24,12 @@
       on-response="_handleResponse"
     ></iron-ajax>
 
-    <iron-list grid items="{{champs}}" as="champ">
+    <iron-list grid items="{{champs}}" as="champ" sort="_compare" selection-enabled=true on-selected-item-changed="_handleSelected">
+
       <template>
           <champ-id champ="{{champ.obj}}"></champ-id>
       </template>
     </iron-list>
-
 
   </template>
 
@@ -41,11 +46,22 @@
       static get is() { return 'champ-list'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'champ-list'
+          champ: {
+            type: Object,
+            notify: true
           }
         };
+      }
+
+     _handleSelected(e){
+        console.info('handle child');
+        //console.info(e.detail.value);
+        //  console.info(this.selectedItem);
+        //this.champ = e.detail.value;
+        //var pages =  this.shadowRoot.querySelector('iron-pages');
+        //console.info(this.shadowRoot);
+        this.dispatchEvent(new CustomEvent('champ-selected', {bubbles: true, composed: true, detail: e.detail.value}));
+
       }
 
       _compare(a, b){
@@ -57,7 +73,7 @@
       }
 
       _handleResponse(response){
-          this.champs = this._toArray(this.lib.data).sort(this._compare);
+          this.champs = this._toArray(this.lib.data)/*.sort(this._compare)*/;
       }
 
       _toArray(obj) {

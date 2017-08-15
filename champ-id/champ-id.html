@@ -1,7 +1,7 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../iron-image/iron-image.html">
 
-<dom-module id="champ-id"  on-click="handleClick">
+<dom-module id="champ-id">
   <template>
 
     <style>
@@ -13,7 +13,6 @@
       }
     </style>
 
-    <!--a href="[[champ.key]]">  </a-->
       <iron-image alt="[[champ.name]]" src="[[ddragon]][[champ.key]].png">
       [[champ.name]]
 
@@ -49,7 +48,7 @@
 
       constructor(){
         super();
-        this.addEventListener('click', e => this._handleClick(e));
+        //this.addEventListener('click', e => this._handleClick(e));
       }
 
     }
