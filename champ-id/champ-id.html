@@ -10,11 +10,21 @@
       }
       iron-image {
         border-radius: 100px;
+        width: 120px;
+        height: 120px;
+      }
+      iron-image #placeholder {
+        -webkit-filter: grayscale(100%);
       }
     </style>
 
-      <iron-image alt="[[champ.name]]" src="[[ddragon]][[champ.key]].png">
-      [[champ.name]]
+      <iron-image
+        preload fade
+        preventLoad
+        placeholder="1389.png"
+        alt="[[champ.name]]"
+        src="[[ddragon]][[champ.key]].png">
+      <p>[[champ.name]]</p>
 
   </template>
 

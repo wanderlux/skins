@@ -8,7 +8,9 @@
     <style>
       :host {
         display: block;
+
       }
+
     </style>
 
     <iron-list items="[[champ.skins]]" as="skin">
@@ -38,8 +40,18 @@
           champ: Object
         };
       }
-    }
 
-    window.customElements.define(SkinList.is, SkinList);
+      _handleClick(e){
+        this.shadowRoot.querySelector('iron-list').fire('iron-resize');
+      }
+      constructor(){
+        super();
+        this.addEventListener('click', e => this._handleClick(e));
+      }
+
+  }
+
+  window.customElements.define(SkinList.is, SkinList);
+
   </script>
 </dom-module>

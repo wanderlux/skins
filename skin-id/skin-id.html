@@ -10,7 +10,13 @@
       }
 
     </style>
-    <iron-image alt="[[name]]" src="[[ddragon]][[key]]_[[num]].jpg"></iron-image>
+
+    <iron-image
+      preload fade
+      placeholder="[[ddragon]][[key]]_0.jpg"
+      alt="[[name]]"
+      src="[[ddragon]][[key]]_[[num]].jpg">
+    </iron-image>
   </template>
 
   <script>
@@ -43,5 +49,6 @@
     }
 
     window.customElements.define(SkinId.is, SkinId);
+        
   </script>
 </dom-module>

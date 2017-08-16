@@ -1,0 +1,79 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<link rel="import" href="../app-route/app-route.html">
+<link rel="import" href="../app-route/app-location.html">
+<link rel="import" href="../app-layout/app-layout.html">
+
+<link rel="import" href="../iron-pages/iron-pages.html">
+
+<!--link rel="import" href="../paper-toolbar/paper-toolbar.html"-->
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<!-- custom elements -->
+<link rel="import" href="../champ-list/champ-list.html">
+<link rel="import" href="../skin-list/skin-list.html">
+<dom-module id="app-pages">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    
+
+    <iron-pages role="main" selected="[[page]]" attr-for-selected="name" selected-attribute="visible">
+
+      <champ-list id="chl" name="home"></champ-list>
+
+      <skin-list id="skl" name="skin" champ="[[champ]]"><skin-list>
+
+    </iron-pages>
+  </template>
+
+  <script>
+    /**
+     * `app-pages`
+     * pages for app
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class AppPages extends Polymer.Element {
+      static get is() { return 'app-pages'; }
+      static get properties() {
+        return {
+          page: {
+            type: String,
+            value: "home"
+          },
+          champ: Object
+        };
+      }
+
+  /*    static get observers() {
+        return []
+      }*/
+
+      _handleChamp(e) {
+        console.info('handle parent');
+        console.info(e);
+        if (e.detail != null) {
+          this.champ = e.detail;
+          this.page = "skin";
+        }
+      }
+
+      constructor(){
+        super();
+        this.addEventListener('champ-selected', e => this._handleChamp(e));
+      }
+    }
+
+    window.customElements.define(AppPages.is, AppPages);
+
+
+
+
+  </script>
+</dom-module>
