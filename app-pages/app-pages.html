@@ -1,13 +1,12 @@
 <link rel="import" href="../polymer/polymer-element.html">
 
-<link rel="import" href="../app-route/app-route.html">
-<link rel="import" href="../app-route/app-location.html">
 <link rel="import" href="../app-layout/app-layout.html">
+<link rel="import" href="../app-route/app-location.html">
+<link rel="import" href="../app-route/app-route.html">
 
+<link rel="import" href="../iron-ajax/iron-ajax.html">
 <link rel="import" href="../iron-pages/iron-pages.html">
 
-<!--link rel="import" href="../paper-toolbar/paper-toolbar.html"-->
-<link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <!-- custom elements -->
 <link rel="import" href="../champ-list/champ-list.html">
 <link rel="import" href="../skin-list/skin-list.html">
@@ -19,15 +18,25 @@
       }
     </style>
 
-    
+    <iron-ajax
+      auto
+      id="libajax"
+      url="champions.json"
+      handleAs="json"
+      last-response="{{lib}}"
+      on-response="_handleResponse"
+    ></iron-ajax>
 
     <iron-pages role="main" selected="[[page]]" attr-for-selected="name" selected-attribute="visible">
 
-      <champ-list id="chl" name="home"></champ-list>
+      <champ-list name="home" champs="{{champs}}" version="[[version]]"></champ-list>
 
-      <skin-list id="skl" name="skin" champ="[[champ]]"><skin-list>
+      <skin-list name="skin" champ="[[champ]]"><skin-list>
+
+      <app-settings name="settings" version="[[version]]"></app-settings>
 
     </iron-pages>
+
   </template>
 
   <script>
@@ -47,33 +56,83 @@
             type: String,
             value: "home"
           },
+          champs: Array,
+          version: String,
           champ: Object
         };
       }
 
-  /*    static get observers() {
-        return []
-      }*/
+      /* handle request */
+      _compare(a, b){
+        if (a.name < b.name)
+          return -1;
+        if (a.name > b.name)
+          return 1;
+        return 0;
+      }
 
+      _handleResponse(response){
+
+          if(localStorage.getItem('as-lib') == null) {
+            var data_array = this._toArray(this.lib.data)
+            this.champs = data_array.sort(this._compare);
+            this.version = this.lib.version;
+            localStorage.setItem('as-lib', JSON.stringify(this.lib));
+          }
+            //this.$.libajax.generateRequest();
+          else {
+            var local_lib = JSON.parse(localStorage.getItem('as-lib'));
+            this.champs = this._toArray(local_lib.data).sort(this._compare);
+            this.version = local_lib.version;
+          }
+
+      }
+
+      _toArray(obj) {
+            return Object.keys(obj).map(function(key) {
+                return {
+                    id: key,
+                    key: obj[key].key,
+                    name: obj[key].name,
+                    title: obj[key].title,
+                    skins: obj[key].skins,
+                    obj: obj[key]
+                };
+            });
+        }
+
+      /* goto champ page */
       _handleChamp(e) {
         console.info('handle parent');
-        console.info(e);
         if (e.detail != null) {
           this.champ = e.detail;
           this.page = "skin";
         }
       }
 
+      /* goto settings page */
+      _handleSettings(){
+        console.info('handle settings');
+        if (e.detail != null)
+          this.page = "settings";
+      }
+
       constructor(){
         super();
+
+      /*  if(localStorage.getItem('as-lib') == null)
+          this.$.libajax.generateRequest();
+        else
+          this.champs = JSON.parse(localStorage.getItem('as-lib')).data;*/
+
+
         this.addEventListener('champ-selected', e => this._handleChamp(e));
+        this.addEventListener('settings-selected',  e => this._handleSettings(e));
+
       }
     }
 
     window.customElements.define(AppPages.is, AppPages);
-
-
-
 
   </script>
 </dom-module>

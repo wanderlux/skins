@@ -16,18 +16,18 @@
       }
     </style>
 
-    <iron-ajax
+    <!--iron-ajax
       auto
       url="champions.json"
       handleAs="json"
       last-response="{{lib}}"
       on-response="_handleResponse"
-    ></iron-ajax>
+    ></iron-ajax-->
 
-    <iron-list grid items="{{champs}}" as="champ" sort="_compare" selection-enabled=true on-selected-item-changed="_handleSelected">
+    <iron-list grid items="[[champs]]" as="champ" sort="_compare" selection-enabled=true on-selected-item-changed="_handleSelected">
 
       <template>
-          <champ-id champ="{{champ.obj}}"></champ-id>
+          <champ-id champ="{{champ.obj}}" version="[[version]]"></champ-id>
       </template>
     </iron-list>
 
@@ -49,31 +49,29 @@
           champ: {
             type: Object,
             notify: true
-          }
+          },
+          champs: Array,
+          version: String
         };
       }
 
      _handleSelected(e){
         console.info('handle child');
-        //console.info(e.detail.value);
-        //  console.info(this.selectedItem);
-        //this.champ = e.detail.value;
-        //var pages =  this.shadowRoot.querySelector('iron-pages');
-        //console.info(this.shadowRoot);
         this.dispatchEvent(new CustomEvent('champ-selected', {bubbles: true, composed: true, detail: e.detail.value}));
-
       }
-
-      _compare(a, b){
+/*
+    _compare(a, b){
         if (a.name < b.name)
           return -1;
         if (a.name > b.name)
           return 1;
         return 0;
-      }
-
+      }*/
+/*
       _handleResponse(response){
-          this.champs = this._toArray(this.lib.data)/*.sort(this._compare)*/;
+          this.champs = this._toArray(this.lib.data).sort(this._compare);
+          this.version = this.lib.version;
+        //  console.info(this.version);
       }
 
       _toArray(obj) {
@@ -87,7 +85,7 @@
                     obj: obj[key]
                 };
             });
-        }
+        }*/
     }
 
     window.customElements.define(ChampList.is, ChampList);
