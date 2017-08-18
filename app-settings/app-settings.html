@@ -1,0 +1,99 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-item/paper-item-body.html">
+<link rel="import" href="../paper-toast/paper-toast.html">
+
+<dom-module id="app-settings">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <iron-ajax
+      id="vajax"
+      verbose
+      url="https://raw.githubusercontent.com/wanderlux/skins/master/champions.json"
+      handleAs="json"
+      lastResponse="{{lib}}"
+      on-response="_handleResponse"
+    ></iron-ajax>
+
+    <paper-item>
+      <paper-item-body two-line>
+        <div>Current version</div>
+        <div secondary>[[version]]</div>
+      </paper-item-body>
+    </paper-item>
+
+    <paper-item on-click="_checkVersion">
+      <paper-item-body two-line>
+        <div>New version</div>
+        <div secondary>[[nversion]]</div>
+      </paper-item-body>
+    </paper-item>
+
+    <!--paper-item><paper-spinner class="multi" alt="Checking patch version"></paper-spinner></paper-item-->
+
+    <paper-button raised on-click="_updateVersion">update</paper-button>
+    <paper-button raised on-click="_resetVersion">reset</paper-button>
+
+    <paper-toast id="success" text="Successful update"></paper-toast>
+    <paper-toast id="fail" text="Failed update"></paper-toast>
+    <paper-toast id="reset" text="Cleaned"></paper-toast>
+  </template>
+
+  <script>
+    /**
+     * `app-settings`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class AppSettings extends Polymer.Element {
+      static get is() { return 'app-settings'; }
+      static get properties() {
+        return {
+          version: String,
+          nversion: {
+            type: String,
+            value: 'Tap to check'
+          }
+        };
+      }
+      _checkVersion(){
+        //this.shadowRoot.querySelector('iron-ajax').generateRequest();
+        this.$.vajax.generateRequest();
+
+      }
+      _handleResponse(event){
+        this.nversion = event.detail.response.version;
+        this.lib = event.detail.response;
+      }
+      _updateVersion(){
+        this._checkVersion();
+        if(localStorage.getItem('as-lib') != null)
+          localStorage.removeItem('as-lib');
+
+        localStorage.setItem('as-lib', JSON.stringify(this.lib));
+
+        if(localStorage.getItem('as-lib') == null)
+          this.$.fail.open();
+        else
+          this.$.success.open();
+      }
+      _resetVersion(){
+        localStorage.removeItem('as-lib');
+        this.$.reset.open();
+      }
+    }
+    window.customElements.define(AppSettings.is, AppSettings);
+  </script>
+</dom-module>
