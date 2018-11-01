@@ -53,6 +53,7 @@ class SkinList extends PolymerElement {
       },
       url: {
         type: String,
+        readOnly: true,
         value: 'http://ddragon.leagueoflegends.com/cdn/8.21.1/data/en_US/champion/'
       },
       skins: {

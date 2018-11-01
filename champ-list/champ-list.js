@@ -21,7 +21,7 @@ class ChampList extends PolymerElement {
 
       <iron-ajax
         auto
-        url="../Aatrox.json"
+        url="http://ddragon.leagueoflegends.com/cdn/8.21.1/data/en_US/champion.json"
         handle-as="json"
         last-response="{{data}}">
       </iron-ajax>
@@ -40,7 +40,9 @@ class ChampList extends PolymerElement {
       <iron-list
         grid
         selection-enabled
-        items="{{_toArray(data.data)}}" as="item">
+        items="{{_toArray(data.data)}}" as="item"
+        selection-enabled=true
+        on-selected-item-changed="handleChamp">
         <template>
           <div>
     <!--      id: {{item.id}}
@@ -55,10 +57,15 @@ class ChampList extends PolymerElement {
   }
   static get properties() {
     return {
-
+      champ: {
+        type: Object,
+        notify: true
+      }
     };
   }
-
+  handleChamp(e) {
+    this.dispatchEvent(new CustomEvent('champ-selected', { bubbles: true, composed: true, detail: e.detail.value.id }));
+  }
 /* "id":"Aatrox",
    "key":"266",
    "name":"Aatrox",
@@ -67,7 +74,7 @@ class ChampList extends PolymerElement {
 
   _toArray(obj) {
         return Object.keys(obj).map(function(key) {
-          console.log(key);
+          //this.set('id', key);
             return {
                 id: key,
                 key: obj[key].key,

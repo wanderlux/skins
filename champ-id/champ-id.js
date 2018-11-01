@@ -19,26 +19,26 @@ class ChampId extends PolymerElement {
           border-radius: 100px;
         }
       </style>
-
-      <a href="#[[champ.id]]">
-      <iron-image
-      placeholder="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/profileicon/588.pngaa" src="http://ddragon.leagueoflegends.com/cdn/8.21.1/img/champion/[[champ.id]].png"></iron-image>
+        <!--a href="#[[champ.id]]"-->
+        <iron-image
+      placeholder="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/profileicon/588.png" src="[[url]][[champ.id]].png"></iron-image>
       <div>[[champ.name]]</div>
-      <!--iron-image src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/profileicon/588.png" /-->
-      </a>
     `;
   }
   static get properties() {
     return {
-      prop1: {
-        type: String,
-        value: 'champ-id',
-      },
       champ: {
-        type: Object
+        type: Object,
+        notify: true
+      },
+      url: {
+        type: String,
+        readOnly: true,
+        value: 'http://ddragon.leagueoflegends.com/cdn/8.21.1/img/champion/'
       }
     };
   }
+
 }
 
 window.customElements.define('champ-id', ChampId);
