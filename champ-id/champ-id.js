@@ -36,9 +36,6 @@ class ChampId extends PolymerElement {
       },
       champ: {
         type: Object
-      },
-      key: {
-        type: String
       }
     };
   }

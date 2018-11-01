@@ -1,7 +1,6 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-list/iron-list.js';
 import '@polymer/iron-ajax/iron-ajax.js';
-//import '@polymer/iron-image/iron-image.js';
 import "./champ-id.js";
 /**
  * `champ-list`
@@ -19,11 +18,10 @@ class ChampList extends PolymerElement {
           display: block;
         }
       </style>
-      <h2>Hello [[prop1]]!</h2>
 
       <iron-ajax
         auto
-        url="../champion.json"
+        url="../Aatrox.json"
         handle-as="json"
         last-response="{{data}}">
       </iron-ajax>
@@ -45,10 +43,10 @@ class ChampList extends PolymerElement {
         items="{{_toArray(data.data)}}" as="item">
         <template>
           <div>
-          id: {{item.id}}
+    <!--      id: {{item.id}}
           key: {{item.key}}
           name: {{item.name}}
-          title: {{item.title}}
+          title: {{item.title}}-->
           <champ-id champ="{{item}}">
           </div>
         </template>
@@ -57,10 +55,7 @@ class ChampList extends PolymerElement {
   }
   static get properties() {
     return {
-      prop1: {
-        type: String,
-        value: 'champ-list',
-      },
+
     };
   }
 
