@@ -6,11 +6,14 @@
 
     <title>champ-id demo</title>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../champ-id.html">
+    <script type="module">
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+      import '@polymer/iron-demo-helpers/demo-snippet';
+    </script>
+
+    <script type="module" src="../champ-id.js"></script>
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
@@ -22,14 +25,7 @@
       <h3>Basic champ-id demo</h3>
       <demo-snippet>
         <template>
-          <champ-id></champ-id>
-        </template>
-      </demo-snippet>
-      <h3>Basic champ-id demo</h3>
-      <demo-snippet>
-        <template>
-          <champ-id champ='{"id": 117, "key": "Lulu", "name": "Lulu", "title": "the Fae Sorceress", "skins": "s"}'></champ-id>
-
+          <champ-id champ='{"id": "Aatrox", "key": 266, "name": "Aatrox", "title": "the Darkin Blade"}'></champ-id>
         </template>
       </demo-snippet>
     </div>

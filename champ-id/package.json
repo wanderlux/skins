@@ -1,0 +1,14 @@
+{
+  "name": "champ-id",
+  "description": "champ badge",
+  "main": "champ-id.js",
+  "dependencies": {
+    "@polymer/iron-image": "^3.0.1",
+    "@polymer/polymer": "^3.0.0"
+  },
+  "devDependencies": {
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "wct-browser-legacy": "^1.0.0"
+  }
+}
