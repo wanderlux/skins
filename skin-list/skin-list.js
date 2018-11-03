@@ -32,20 +32,17 @@ class SkinList extends PolymerElement {
         selection-enabled
         items="[[skins]]" as="item">
         <template>
-          <div>
-
-<!--          id: {{item.id}}
-          name: {{item.name}}
-          num: {{item.num}}
-          chromas: {{item.chromas}} -->
           <skin-id champ="[[id]]" skin="{{item}}"><skin-id>
-
-          </div>
         </template>
       </iron-list>
 
     `;
   }
+  /*
+    id: {{item.id}}
+    name: {{item.name}}
+    num: {{item.num}}
+    chromas: {{item.chromas}} */
   static get properties() {
     return {
       id: {
@@ -60,15 +57,12 @@ class SkinList extends PolymerElement {
         type: Object
       }
     };
-  }/*
-  _getSkins(data) {
-    console.log(data);
+  }
 
-  }*/
   _handleResponse(response){
     this.set('skins', response.detail.__data.response.data[this.get('id')].skins);
-    //return response.detail.__data.response.data[this.get('id')].skins;
   }
+
 }
 
 window.customElements.define('skin-list', SkinList);
